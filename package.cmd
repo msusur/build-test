@@ -1,1 +1,1 @@
-.nuget\nuget.exe 
+.nuget\nuget.exe pack BuildTest\BuildTest.csproj

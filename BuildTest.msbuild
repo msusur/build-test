@@ -9,7 +9,7 @@
   </PropertyGroup>
   <ItemGroup>            
         <SolutionsToBuild Include="BuildTest.sln">
-            <ReleaseRoot>.</ReleaseRoot>
+            <DebugRoot>.</DebugRoot>
             <BuildInParallel>$(BuildInParallel)</BuildInParallel>
         </SolutionsToBuild>    
   </ItemGroup>    
@@ -18,14 +18,14 @@
            Projects="@(SolutionsToBuild)"
            Targets="Clean"
            Properties="Configuration=$(Configuration)" />
-       <RemoveDir Directories="bin\%(SolutionsToBuild.ReleaseRoot)\$(Configuration)" />
+       <RemoveDir Directories="bin\%(SolutionsToBuild.DebugRoot)\$(Configuration)" />
    </Target>
   <Target Name="RestorePackages" DependsOnTargets="Clean">
         <MSBuild Projects="@(RestoreCsProjFiles)" Targets="EnableRestore;RestorePackages" StopOnFirstFailure="true" />
         <MSBuild Projects=".nuget\nuget.targets" Targets="EnableRestore;RestoreBinaryDependencies" />
   </Target>
   <Target Name="Build" DependsOnTargets="RestorePackages">
-      <MakeDir Directories="bin\%(SolutionsToBuild.ReleaseRoot)\$(Configuration)" />
+      <MakeDir Directories="bin\%(SolutionsToBuild.DebugRoot)\$(Configuration)" />
       <MSBuild
           Projects="%(SolutionsToBuild.Identity)"
           BuildInParallel="%(SolutionsToBuild.BuildInParallel)"
