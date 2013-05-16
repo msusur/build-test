@@ -42,6 +42,5 @@
     
   </Target>
   <Target Name="CleanRestoreBuildTest" DependsOnTargets="CreateNugetPackage">
-   
   </Target>
 </Project>
