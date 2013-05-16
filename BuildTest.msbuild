@@ -38,9 +38,6 @@
   <Target Name="UnitTest" DependsOnTargets="Build">
 	<xunit Assembly="bin\Tests\BuildTest.Tests.dll" />
   </Target>
-  <Target Name="CreateNugetPackage" DependsOnTargets="UnitTest">
-    
-  </Target>
-  <Target Name="CleanRestoreBuildTest" DependsOnTargets="CreateNugetPackage">
+  <Target Name="CleanRestoreBuildTest" DependsOnTargets="UnitTest">
   </Target>
 </Project>
