@@ -1,4 +1,4 @@
-<Project DefaultTargets="BuildTest" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="CleanRestoreBuildTest" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <NuGetExe Condition="$(NuGetExe) == ''">.\.nuget\nuget.exe</NuGetExe>
 	 <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
@@ -20,29 +20,28 @@
            Properties="Configuration=$(Configuration)" />
        <RemoveDir Directories="bin\%(SolutionsToBuild.ReleaseRoot)\$(Configuration)" />
    </Target>
-       <Target Name="RestorePackages" DependsOnTargets="Clean">
+  <Target Name="RestorePackages" DependsOnTargets="Clean">
         <MSBuild Projects="@(RestoreCsProjFiles)" Targets="EnableRestore;RestorePackages" StopOnFirstFailure="true" />
         <MSBuild Projects=".nuget\nuget.targets" Targets="EnableRestore;RestoreBinaryDependencies" />
-    </Target>
-	
-
-    <Target Name="Build" DependsOnTargets="RestorePackages">
-        <MakeDir Directories="bin\%(SolutionsToBuild.ReleaseRoot)\$(Configuration)" />
-        <MSBuild
-            Projects="%(SolutionsToBuild.Identity)"
-            BuildInParallel="%(SolutionsToBuild.BuildInParallel)"
-            Targets="Build"
-            Properties="Configuration=$(Configuration);CodeAnalysis=$(CodeAnalysis);StyleCopEnabled=$(StyleCopEnabled)" />
-    </Target>
-	<Target Name="UnitTest" DependsOnTargets="Build">
-          <Exec ContinueOnError='true' 
-                  Command='$(NUnitEXE) $(NUnitArgs) @(TestAssembly)'
-                  WorkingDirectory='%(WorkingDirectory)' />
-    </Target>
+  </Target>
+  <Target Name="Build" DependsOnTargets="RestorePackages">
+      <MakeDir Directories="bin\%(SolutionsToBuild.ReleaseRoot)\$(Configuration)" />
+      <MSBuild
+          Projects="%(SolutionsToBuild.Identity)"
+          BuildInParallel="%(SolutionsToBuild.BuildInParallel)"
+          Targets="Build"
+          Properties="Configuration=$(Configuration);CodeAnalysis=$(CodeAnalysis);StyleCopEnabled=$(StyleCopEnabled)" />
+  </Target>
+  <UsingTask
+		AssemblyFile="Tools\xunit-1.9.1\xunit.runner.msbuild.dll"
+		TaskName="Xunit.Runner.MSBuild.xunit" />
+  <Target Name="UnitTest" DependsOnTargets="Build">
+	<xunit Assembly="bin\Tests\BuildTest.Tests.dll" />
+  </Target>
   <Target Name="CreateNugetPackage" DependsOnTargets="UnitTest">
     
   </Target>
-  	<Target Name="BuildTest" DependsOnTargets="CreateNugetPackage">
+  <Target Name="CleanRestoreBuildTest" DependsOnTargets="CreateNugetPackage">
    
-    </Target>
+  </Target>
 </Project>

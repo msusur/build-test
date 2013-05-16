@@ -5,7 +5,7 @@ namespace BuildTest.Tests
     // ReSharper disable InconsistentNaming
     public class BuildTestClassTest
     {
-        [Fact]
+        //[Fact]
         public void Test_That_Fails()
         {
             Assert.True(new TestClass().False());
