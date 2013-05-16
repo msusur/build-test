@@ -32,4 +32,7 @@ goto BuildSuccess
 
 :End
 package.cmd 1.0.3
+cd ..
+DEL build-test\*.* /S /q
+rd build-test
 popd
