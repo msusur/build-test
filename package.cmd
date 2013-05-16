@@ -1,1 +1,1 @@
-.nuget\nuget.exe pack BuildTest\BuildTest.csproj
+.nuget\NuGet.exe pack BuildTest\BuildTest.csproj -version 1.0.1

@@ -1,4 +1,4 @@
 git clone git://github.com/msusur/build-test.git
-clean.cmd
+cd build-test
 build.cmd
 package.cmd
