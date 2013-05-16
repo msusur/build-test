@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{854121
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildTest.Tests", "..\BuildTest.Tests\BuildTest.Tests.csproj", "{DAFBCAF5-A465-429C-91C6-73EA013F01C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildTest.Tests", "BuildTest.Tests\BuildTest.Tests.csproj", "{DAFBCAF5-A465-429C-91C6-73EA013F01C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
