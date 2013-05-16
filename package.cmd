@@ -1,1 +1,1 @@
-.nuget\NuGet.exe pack BuildTest\BuildTest.csproj -version %1 --outputdirectory ..\
+.nuget\NuGet.exe pack BuildTest\BuildTest.csproj -version %1
