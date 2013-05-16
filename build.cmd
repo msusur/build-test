@@ -17,7 +17,7 @@ goto BuildSuccess
 :BuildSuccess
 echo.
 echo **** BUILD SUCCESSFUL ***
-goto end
+goto End
 
 :BuildFail
 echo.
@@ -31,4 +31,5 @@ goto BuildSuccess
 
 
 :End
+package.cmd 1.0.3
 popd
